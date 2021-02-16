@@ -4,7 +4,7 @@
   "description": "A minimal Electron application written with Typescript",
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w",
+    "watch": "nodemon",
     "lint": "eslint -c .eslintrc --ext .ts ./src",
     "start": "npm run build && electron ./dist/main.js"
   },
@@ -25,7 +25,16 @@
     "@typescript-eslint/parser": "^4.15.0",
     "electron": "^11.2.3",
     "eslint": "^7.19.0",
-    "typescript": "^4.1.5"
+    "typescript": "^4.1.5",
+    "nodemon": "^2.0.7"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src/backend"
+  ],
+    "ignore": ["test/*", "docs/*","dist/*"],
+    "delay": "2500",
+    "exec": "npm run start"
   },
   "dependencies": {
     "local-sidereal-time": "^1.0.4"

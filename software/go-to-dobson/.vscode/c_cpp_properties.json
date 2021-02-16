@@ -8,8 +8,11 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "d:/Pingoin/Dokumente/PlatformIO/Projects/go-to-dobson/include",
-                "d:/Pingoin/Dokumente/PlatformIO/Projects/go-to-dobson/src",
+                "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/include",
+                "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/src",
+                "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/.pio/libdeps/nodemcu-32s/Adafruit HMC5883 Unified",
+                "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/.pio/libdeps/nodemcu-32s/Adafruit Unified Sensor",
+                "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                 "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
                 "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update",
@@ -99,15 +102,17 @@
                 "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src",
                 "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                 "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
-                "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 "C:/Users/jo_di/.platformio/packages/tool-unity",
                 ""
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "d:/Pingoin/Dokumente/PlatformIO/Projects/go-to-dobson/include",
-                    "d:/Pingoin/Dokumente/PlatformIO/Projects/go-to-dobson/src",
+                    "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/include",
+                    "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/src",
+                    "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/.pio/libdeps/nodemcu-32s/Adafruit HMC5883 Unified",
+                    "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/.pio/libdeps/nodemcu-32s/Adafruit Unified Sensor",
+                    "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                     "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
                     "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update",
@@ -197,7 +202,6 @@
                     "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src",
                     "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                     "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
-                    "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     "C:/Users/jo_di/.platformio/packages/tool-unity",
                     ""
                 ]
