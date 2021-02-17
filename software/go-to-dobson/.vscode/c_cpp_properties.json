@@ -10,6 +10,7 @@
             "includePath": [
                 "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/include",
                 "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/src",
+                "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/.pio/libdeps/nodemcu-32s/Kalman Filter Library",
                 "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/.pio/libdeps/nodemcu-32s/Adafruit HMC5883 Unified",
                 "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/.pio/libdeps/nodemcu-32s/Adafruit Unified Sensor",
                 "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
@@ -110,6 +111,7 @@
                 "path": [
                     "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/include",
                     "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/src",
+                    "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/.pio/libdeps/nodemcu-32s/Kalman Filter Library",
                     "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/.pio/libdeps/nodemcu-32s/Adafruit HMC5883 Unified",
                     "d:/Projekte/Elektronik/go-to-dobson/software/go-to-dobson/.pio/libdeps/nodemcu-32s/Adafruit Unified Sensor",
                     "C:/Users/jo_di/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
