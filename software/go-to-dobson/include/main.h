@@ -2,7 +2,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include <Arduino.h>
-#include "Wire.h"
 #include <ESP_FlexyStepper.h>
 
 #define stepPinAz 15
@@ -15,6 +14,7 @@
 #define STEPS_PER_DEGREE_AZIMUTH STEPS_PER_REVOLVE*10
 
 ESP_FlexyStepper azAxis;
+double azimuth=0.0, altitude=0.0;
 
 
 #endif
