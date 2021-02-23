@@ -31,12 +31,17 @@
   "nodemonConfig": {
     "watch": [
       "src/backend"
-  ],
-    "ignore": ["test/*", "docs/*","dist/*"],
+    ],
+    "ignore": [
+      "test/*",
+      "docs/*",
+      "dist/*"
+    ],
     "delay": "2500",
     "exec": "npm run start"
   },
   "dependencies": {
+    "astronomical-algorithms": "^1.1.4",
     "local-sidereal-time": "^1.0.4"
   }
 }

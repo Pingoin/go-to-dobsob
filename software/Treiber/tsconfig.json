@@ -3,7 +3,11 @@
     "module": "commonjs",
     "noImplicitAny": true,
     "sourceMap": true,
+    "moduleResolution": "node", 
+    "esModuleInterop": true,
     "outDir": "dist",
+    "target": "es5",
+    "declaration": true,
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"]
