@@ -34,21 +34,17 @@
     </v-app-bar>
 
     <v-main>
-      <router-view />
+      <router-view :socket="socket" />
     </v-main>
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { Component, Vue } from "vue-property-decorator";
+import SocketHelper from "./plugins/SocketHelper";
 
-export default Vue.extend({
-  name: "App",
-
-  components: {},
-
-  data: () => ({
-    //
-  })
-});
+@Component
+export default class App extends Vue {
+  socket = new SocketHelper();
+}
 </script>
