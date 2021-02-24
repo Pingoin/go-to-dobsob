@@ -1,5 +1,6 @@
 import aa from "./astronomical-algorithms";
 import * as net from "net";
+import serialPort from "serialport";
 const latitude = 53 + 44 / 60 + 16.44 / 3600;
 const longitude = 14 + 2 / 60 + 40.92 / 3600;
 export class Driver {
@@ -7,14 +8,48 @@ export class Driver {
   private server: net.Server;
   private socket: net.Socket | null = null;
   private stellariumWorker: NodeJS.Timeout | null = null;
+  private COMport:serialPort|null=null;
+  private parser: serialPort.parsers.Delimiter|null=null;
   private istPosition = {
     alt: 0,
-    azimuth: 0
+    azimuth: 0,
   };
   private sollPosition = {
     dec: 0,
-    ra: 0
+    ra: 0,
   };
+ 
+  public connectSerial(port:string){
+    this.COMport = new serialPort(port, {
+      baudRate: 115200
+    });
+
+    this.parser = this.COMport.pipe(new serialPort.parsers.Delimiter({ delimiter: "\n" }));
+    this.parser.on("data",this.interpretCOM.bind(this));
+  }
+
+  private interpretCOM(data:Buffer){
+    const msg=data.toString().split(";");
+    const command=parseInt(msg[0],16);
+    switch (command) {
+      case 0x01:
+        this.istPosition.azimuth=parseFloat(msg[1]);
+        this.istPosition.alt=parseFloat(msg[2]);
+        break;
+    
+      default:
+        break;
+    }
+  }
+  public async listSerialPorts() {
+    return serialPort.list().then((ports) => {
+      const portsList: string[] = [];
+      ports.forEach((port) => {
+        portsList.push(port.path);
+      });
+      return portsList;
+    });
+  }
   private forcePosition = false;
 
   constructor(port: number) {
@@ -70,7 +105,7 @@ export class Driver {
     const jd = aa.julianday.getJulianDay(new Date()) || 0;
     const {
       azimuth,
-      altitude
+      altitude,
     } = aa.coordinates.transformEquatorialToHorizontal(
       jd,
       longitude,
@@ -78,9 +113,6 @@ export class Driver {
       this.sollPosition.ra,
       this.sollPosition.dec
     );
-
-    this.istPosition.alt = altitude;
-    this.istPosition.azimuth = azimuth;
   }
 
   private setSollByStellarium(chunk: Buffer): void {
