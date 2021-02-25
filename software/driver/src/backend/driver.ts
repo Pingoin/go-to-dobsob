@@ -116,10 +116,17 @@ export class Driver {
       this.sollPosition.ra,
       this.sollPosition.dec
     );
+
+    const msg = `02;${azimuth > 0 ? "+" : ""}${azimuth.toPrecision(
+      Math.abs(azimuth) > 1 ? 16 : 15
+    )};${altitude > 0 ? "+" : ""}${altitude.toPrecision(
+      Math.abs(altitude) > 1 ? 16 : 15
+    )}\n`;
+    if (this.COMport != null) this.COMport.write(msg);
+    console.log(msg);
   }
 
   private setSollByStellarium(chunk: Buffer): void {
-    console.log(chunk);
     this.sollPosition.ra = (chunk.readUInt32LE(12) / 0x100000000) * 24;
     this.sollPosition.dec = (chunk.readInt32LE(16) / 0x40000000) * 90;
   }
@@ -138,7 +145,6 @@ export class Driver {
     const RAraw = Math.round((eq.rightAscension / 24) * 0x100000000);
     const DECraw = Math.round((eq.declination / 90) * 0x40000000);
     console.log(eq);
-    console.log(this.socket);
     if (this.socket != null) {
       const buffer = Buffer.alloc(24, 0);
       buffer.writeInt16LE(24, 0);
@@ -147,7 +153,6 @@ export class Driver {
       for (let index = 0; index < 10; index++) {
         this.socket.write(buffer);
       }
-      console.log("send");
     }
   }
 }

@@ -14,89 +14,46 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L wemos_mini:WeMos_mini U?
-U 1 1 6022B98D
-P 5400 2650
-F 0 "U?" H 5400 3287 60  0000 C CNN
-F 1 "WeMos_mini" H 5400 3181 60  0000 C CNN
-F 2 "" H 5950 1950 60  0000 C CNN
-F 3 "http://www.wemos.cc/Products/d1_mini.html" H 5950 1950 60  0001 C CNN
-	1    5400 2650
+L mighty_esp32_38_pins-custom_library:esp32_38_pins-custom_library U?
+U 1 1 603819DF
+P 5750 1950
+F 0 "U?" H 6100 2597 50  0000 C CNN
+F 1 "esp32_38_pins-custom_library" H 6100 2506 50  0000 C CNN
+F 2 "esp32_lora_v2:esp32_devkitv4_38pin" H 6100 2415 50  0000 C CNN
+F 3 "https://docs.espressif.com/projects/esp-idf/en/latest/get-started/get-started-devkitc.html" H 6100 2324 50  0000 C CNN
+	1    5750 1950
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:+5V #PWR?
-U 1 1 6022C354
-P 4800 2250
-F 0 "#PWR?" H 4800 2100 50  0001 C CNN
-F 1 "+5V" H 4815 2423 50  0000 C CNN
-F 2 "" H 4800 2250 50  0001 C CNN
-F 3 "" H 4800 2250 50  0001 C CNN
-	1    4800 2250
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 6022CC0A
-P 4450 2400
-F 0 "#PWR?" H 4450 2150 50  0001 C CNN
-F 1 "GND" H 4455 2227 50  0000 C CNN
-F 2 "" H 4450 2400 50  0001 C CNN
-F 3 "" H 4450 2400 50  0001 C CNN
-	1    4450 2400
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3.3V #PWR?
-U 1 1 6022D3E5
-P 6000 2150
-F 0 "#PWR?" H 6000 2000 50  0001 C CNN
-F 1 "+3.3V" H 6015 2323 50  0000 C CNN
-F 2 "" H 6000 2150 50  0001 C CNN
-F 3 "" H 6000 2150 50  0001 C CNN
-	1    6000 2150
-	1    0    0    -1  
-$EndComp
-Text GLabel 4800 2800 0    50   Input ~ 0
+Text GLabel 6800 2750 2    50   Input ~ 0
+azDir
+Text GLabel 6800 2850 2    50   Input ~ 0
+azStp
+Text GLabel 6800 2950 2    50   Input ~ 0
+azEn
+Text GLabel 6800 3050 2    50   Input ~ 0
+altDir
+Text GLabel 6800 3150 2    50   Input ~ 0
+altStp
+Text GLabel 6800 3250 2    50   Input ~ 0
+altEn
+Text GLabel 6850 2250 2    50   Input ~ 0
 SDA
-Text GLabel 4800 2700 0    50   Input ~ 0
+Text GLabel 6850 1950 2    50   Input ~ 0
 SCL
-Text GLabel 4800 2600 0    50   Input ~ 0
-DIR1
-Text GLabel 4800 2500 0    50   Input ~ 0
-DIR2
-Text GLabel 6000 2800 2    50   Input ~ 0
-EN1
-Text GLabel 6000 2700 2    50   Input ~ 0
-EN2
-Text GLabel 6000 2600 2    50   Input ~ 0
-PUL1
-Text GLabel 6000 2500 2    50   Input ~ 0
-PUL2
 Wire Wire Line
-	4900 2800 4800 2800
+	6650 1950 6850 1950
 Wire Wire Line
-	4900 2700 4800 2700
+	6850 2250 6650 2250
 Wire Wire Line
-	4900 2600 4800 2600
+	6650 2750 6800 2750
 Wire Wire Line
-	4900 2500 4800 2500
+	6650 2850 6800 2850
 Wire Wire Line
-	4900 2400 4450 2400
+	6650 2950 6800 2950
 Wire Wire Line
-	4900 2300 4800 2300
+	6650 3050 6800 3050
 Wire Wire Line
-	4800 2300 4800 2250
+	6650 3150 6800 3150
 Wire Wire Line
-	5900 2500 6000 2500
-Wire Wire Line
-	5900 2600 6000 2600
-Wire Wire Line
-	5900 2700 6000 2700
-Wire Wire Line
-	5900 2800 6000 2800
-Wire Wire Line
-	5900 2300 6000 2300
-Wire Wire Line
-	6000 2300 6000 2150
+	6650 3250 6800 3250
 $EndSCHEMATC

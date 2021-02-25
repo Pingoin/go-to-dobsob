@@ -24,23 +24,22 @@ Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x29);
 float target = 1.0;
 void printEvent(sensors_event_t *event);
 
+unsigned long sendTime;
+
 void setup()
 {
   Serial.begin(115200);
-  azAxis.connectToPins(stepPinAz, dirPinAz);
-  azAxis.setSpeedInStepsPerSecond(SPEED_IN_STEPS_PER_SECOND);
-  azAxis.setAccelerationInStepsPerSecondPerSecond(ACCELERATION_IN_STEPS_PER_SECOND);
-  azAxis.setDecelerationInStepsPerSecondPerSecond(DECELERATION_IN_STEPS_PER_SECOND);
-  azAxis.setStepsPerMillimeter(STEPS_PER_DEGREE_AZIMUTH);
-  azAxis.setStepsPerRevolution(STEPS_PER_REVOLVE);
-  azAxis.setCurrentPositionInMillimeters(0.0);
-  azAxis.startAsService();
+  altAZ.init();
   if (!bno.begin())
   {
     Serial.print("No BNO055 detected");
     while (1)
       ;
   }
+  delay(100);
+  sensors_event_t orientationData;
+  bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);
+  printEvent(&orientationData);
 
   lcd.init(); //Im Setup wird der LCD gestartet
   lcd.backlight();
@@ -50,26 +49,21 @@ void setup()
 
 void loop()
 {
-  sensors_event_t orientationData;
-  bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);
-  printEvent(&orientationData);
-  //Serial.printf("Moving with %f /sec at %f\n",azAxis.getCurrentVelocityInRevolutionsPerSecond(),azAxis.getCurrentPositionInMillimeters());
-
-  if (azAxis.getDistanceToTargetSigned() == 0)
+  
+  if (millis() - sendTime >= 500)
   {
-    //Serial.printf("Moving stepper to %2.2f deg\n", target);
-    azAxis.setTargetPositionInMillimeters(target);
-    if (target >= 10)
-    {
-      target = 0;
-    }
-    else
-    {
-      target++;
+    Serial.printf("01;%+018.13f;%+018.14f\n", altAZ.getAzimuth(), altAZ.getAltitude());
+    sendTime = millis();
+  }
+  if(Serial.available()){
+    String tmp = Serial.readStringUntil('\n');
+    String command=tmp.substring(0,1);
+    if (command.compareTo("02")){
+      double azNew = tmp.substring(3, 21).toDouble();
+      double altNew = tmp.substring(22, 41).toDouble();
+      altAZ.setTarget(azNew,altNew);
     }
   }
-
-  delay(1000);
 }
 
 void printEvent(sensors_event_t *event)
@@ -86,14 +80,11 @@ void printEvent(sensors_event_t *event)
       x -= 180;
     }
 
-    if (z>180){
-      z-=360;
+    if (z > 180)
+    {
+      z -= 360;
     }
-    Serial.printf("01;%3.15f;%2.16f\n", x, z);
+    
   }
-
-  lcd.setCursor(0, 0);
-  lcd.printf("Azimuth=%3.5f", x);
-  lcd.setCursor(0, 1);
-  lcd.printf("Altitude=%3.5f", z);
+  altAZ.setPosition(x,z);
 }
