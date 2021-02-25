@@ -1,3 +1,5 @@
+/** @format */
+
 "use strict";
 
 import { app, protocol, BrowserWindow } from "electron";
@@ -9,7 +11,7 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
-  { scheme: "app", privileges: { secure: true, standard: true } },
+  { scheme: "app", privileges: { secure: true, standard: true } }
 ]);
 
 async function createWindow() {
@@ -21,8 +23,8 @@ async function createWindow() {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: (process.env
-        .ELECTRON_NODE_INTEGRATION as unknown) as boolean,
-    },
+        .ELECTRON_NODE_INTEGRATION as unknown) as boolean
+    }
   });
   const driver = new Driver(10001);
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -34,12 +36,12 @@ async function createWindow() {
     // Load the index.html when not in development
     win.loadURL("app://./index.html");
   }
-  driver.listSerialPorts().then((ports) => {
+  driver.listSerialPorts().then(ports => {
     tsipc.main.send.serialPorts(win, ports);
   });
-  tsipc.main.on.setPort(port=>{
+  tsipc.main.on.setPort(port => {
     driver.connectSerial(port);
-  })
+  });
 }
 
 // Quit when all windows are closed.
@@ -75,7 +77,7 @@ app.on("ready", async () => {
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
   if (process.platform === "win32") {
-    process.on("message", (data) => {
+    process.on("message", data => {
       if (data === "graceful-exit") {
         app.quit();
       }

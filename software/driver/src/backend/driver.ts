@@ -1,3 +1,5 @@
+/** @format */
+
 import aa from "./astronomical-algorithms";
 import * as net from "net";
 import serialPort from "serialport";
@@ -7,44 +9,48 @@ export class Driver {
   private port: number;
   private server: net.Server;
   private socket: net.Socket | null = null;
-  private stellariumWorker: NodeJS.Timeout | null = null;
-  private COMport:serialPort|null=null;
-  private parser: serialPort.parsers.Delimiter|null=null;
+  private COMport: serialPort | null = null;
+  private parser: serialPort.parsers.Delimiter | null = null;
   private istPosition = {
     alt: 0,
-    azimuth: 0,
+    azimuth: 0
   };
   private sollPosition = {
     dec: 0,
-    ra: 0,
+    ra: 0
   };
- 
-  public connectSerial(port:string){
+
+  public connectSerial(port: string) {
     this.COMport = new serialPort(port, {
       baudRate: 115200
     });
 
-    this.parser = this.COMport.pipe(new serialPort.parsers.Delimiter({ delimiter: "\n" }));
-    this.parser.on("data",this.interpretCOM.bind(this));
+    this.parser = this.COMport.pipe(
+      new serialPort.parsers.Delimiter({ delimiter: "\n" })
+    );
+    this.parser.on("data", this.interpretCOM.bind(this));
   }
 
-  private interpretCOM(data:Buffer){
-    const msg=data.toString().split(";");
-    const command=parseInt(msg[0],16);
+  private interpretCOM(data: Buffer) {
+    const msg = data.toString().split(";");
+    const command = parseInt(msg[0], 16);
     switch (command) {
       case 0x01:
-        this.istPosition.azimuth=parseFloat(msg[1]);
-        this.istPosition.alt=parseFloat(msg[2]);
+        console.log(msg);
+        this.istPosition.azimuth = parseFloat(msg[1]);
+        this.istPosition.alt = parseFloat(msg[2]);
+        this.sendPosition();
         break;
-    
+
       default:
         break;
     }
   }
+
   public async listSerialPorts() {
-    return serialPort.list().then((ports) => {
+    return serialPort.list().then(ports => {
       const portsList: string[] = [];
-      ports.forEach((port) => {
+      ports.forEach(port => {
         portsList.push(port.path);
       });
       return portsList;
@@ -62,7 +68,6 @@ export class Driver {
     });
     console.log();
     setInterval(this.writeOnController.bind(this), 500);
-    this.stellariumWorker = setInterval(this.sendPosition.bind(this), 2000);
     this.server.on("connection", this.connected.bind(this));
   }
 
@@ -76,9 +81,6 @@ export class Driver {
       this.socket = socket;
     }
 
-    if (this.stellariumWorker == null) {
-      this.stellariumWorker = setInterval(this.sendPosition.bind(this), 2000);
-    }
     // The server can also receive data from the client by reading from its socket.
     socket.on("data", this.setSollByStellarium.bind(this));
 
@@ -90,10 +92,11 @@ export class Driver {
     socket.on("error", this.closeSocket.bind(this));
   }
   private closeSocket(err?: Error) {
-    if (this.socket) this.socket.end(() => (this.socket = null));
-    if (this.stellariumWorker != null) clearTimeout(this.stellariumWorker);
-    this.stellariumWorker = null;
-
+    if (this.socket != null)
+      this.socket.end(() => {
+        this.socket = null;
+      });
+    this.socket = null;
     if (err) {
       console.log(`Error: ${err}`);
     } else {
@@ -105,7 +108,7 @@ export class Driver {
     const jd = aa.julianday.getJulianDay(new Date()) || 0;
     const {
       azimuth,
-      altitude,
+      altitude
     } = aa.coordinates.transformEquatorialToHorizontal(
       jd,
       longitude,
@@ -135,6 +138,7 @@ export class Driver {
     const RAraw = Math.round((eq.rightAscension / 24) * 0x100000000);
     const DECraw = Math.round((eq.declination / 90) * 0x40000000);
     console.log(eq);
+    console.log(this.socket);
     if (this.socket != null) {
       const buffer = Buffer.alloc(24, 0);
       buffer.writeInt16LE(24, 0);

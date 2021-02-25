@@ -1,3 +1,5 @@
+<!-- @format -->
+
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
@@ -10,7 +12,6 @@
           transition="scale-transition"
           width="40"
         />
-
         <v-img
           alt="Vuetify Name"
           class="shrink mt-1 hidden-sm-and-down"
