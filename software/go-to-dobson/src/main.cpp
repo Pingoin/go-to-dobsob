@@ -37,6 +37,7 @@ void setup()
       ;
   }
   delay(100);
+  SerialBT.begin("ESP32test");
   sensors_event_t orientationData;
   bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);
   printEvent(&orientationData);
@@ -53,6 +54,9 @@ void loop()
   if (millis() - sendTime >= 500)
   {
     Serial.printf("01;%+018.13f;%+018.14f\n", altAZ.getAzimuth(), altAZ.getAltitude());
+    if(SerialBT.connected()){
+      SerialBT.printf("01;%+018.13f;%+018.14f\n", altAZ.getAzimuth(), altAZ.getAltitude());
+    }
     sendTime = millis();
   }
   if(Serial.available()){
@@ -62,6 +66,22 @@ void loop()
       double azNew = tmp.substring(3, 21).toDouble();
       double altNew = tmp.substring(22, 41).toDouble();
       altAZ.setTarget(azNew,altNew);
+      Serial.printf("02\n");
+      SerialBT.printf("02\n");
+    }
+  }
+  
+  if (SerialBT.available())
+  {
+    String tmp = SerialBT.readStringUntil('\n');
+    String command = tmp.substring(0, 1);
+    if (command.compareTo("02")) 
+    {
+      double azNew = tmp.substring(3, 21).toDouble();
+      double altNew = tmp.substring(22, 41).toDouble();
+      altAZ.setTarget(azNew, altNew);
+      Serial.printf("02\n");
+      SerialBT.printf("02\n");
     }
   }
 }
@@ -87,4 +107,5 @@ void printEvent(sensors_event_t *event)
     
   }
   altAZ.setPosition(x,z);
+  altAZ.setTarget(x,z);
 }

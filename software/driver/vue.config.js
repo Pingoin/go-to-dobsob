@@ -3,13 +3,14 @@ module.exports = {
   pluginOptions: {
     electronBuilder: {
       nodeIntegration: true,
-      externals: ['serialport']
+      externals: ["serialport", "bluetoothSerialPort"]
     }
   },
 
   configureWebpack: {
     externals: {
-      serialport: "commonjs2 serialport"
+      serialport: "commonjs2 serialport",
+      bluetoothSerialPort: "commonjs2 bluetooth-serial-port"
     }
   }
 };

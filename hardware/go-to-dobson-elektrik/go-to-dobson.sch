@@ -24,9 +24,9 @@ F 3 "https://docs.espressif.com/projects/esp-idf/en/latest/get-started/get-start
 	1    5750 1950
 	1    0    0    -1  
 $EndComp
-Text GLabel 6800 2750 2    50   Input ~ 0
+Text GLabel 6800 2550 2    50   Input ~ 0
 azDir
-Text GLabel 6800 2850 2    50   Input ~ 0
+Text GLabel 6800 2650 2    50   Input ~ 0
 azStp
 Text GLabel 6800 2950 2    50   Input ~ 0
 azEn
@@ -45,9 +45,9 @@ Wire Wire Line
 Wire Wire Line
 	6850 2250 6650 2250
 Wire Wire Line
-	6650 2750 6800 2750
+	6650 2550 6800 2550
 Wire Wire Line
-	6650 2850 6800 2850
+	6650 2650 6800 2650
 Wire Wire Line
 	6650 2950 6800 2950
 Wire Wire Line

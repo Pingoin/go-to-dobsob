@@ -21,22 +21,29 @@ export class Driver {
   };
 
   public connectSerial(port: string) {
-    this.COMport = new serialPort(port, {
-      baudRate: 115200
-    });
+    if (this.COMport != null && this.COMport.isOpen) {
+      this.COMport.close(() => {
+        this.COMport = null;
+      });
+    } else {
+      this.COMport = new serialPort(port, {
+        baudRate: 115200
+      });
 
-    this.parser = this.COMport.pipe(
-      new serialPort.parsers.Delimiter({ delimiter: "\n" })
-    );
-    this.parser.on("data", this.interpretCOM.bind(this));
+      this.parser = this.COMport.pipe(
+        new serialPort.parsers.Delimiter({ delimiter: "\n" })
+      );
+      this.parser.on("data", this.interpretCOM.bind(this));
+    }
   }
 
   private interpretCOM(data: Buffer) {
+    console.log(data.toString());
     const msg = data.toString().split(";");
     const command = parseInt(msg[0], 16);
     switch (command) {
       case 0x01:
-        console.log(msg);
+        //console.log(msg);
         this.istPosition.azimuth = parseFloat(msg[1]);
         this.istPosition.alt = parseFloat(msg[2]);
         this.sendPosition();
@@ -51,6 +58,7 @@ export class Driver {
     return serialPort.list().then(ports => {
       const portsList: string[] = [];
       ports.forEach(port => {
+        console.log(port);
         portsList.push(port.path);
       });
       return portsList;
@@ -123,7 +131,7 @@ export class Driver {
       Math.abs(altitude) > 1 ? 16 : 15
     )}\n`;
     if (this.COMport != null) this.COMport.write(msg);
-    console.log(msg);
+    //console.log(msg);
   }
 
   private setSollByStellarium(chunk: Buffer): void {
@@ -144,7 +152,7 @@ export class Driver {
     eq.rightAscension = Math.max(eq.rightAscension, 0);
     const RAraw = Math.round((eq.rightAscension / 24) * 0x100000000);
     const DECraw = Math.round((eq.declination / 90) * 0x40000000);
-    console.log(eq);
+    //console.log(eq);
     if (this.socket != null) {
       const buffer = Buffer.alloc(24, 0);
       buffer.writeInt16LE(24, 0);

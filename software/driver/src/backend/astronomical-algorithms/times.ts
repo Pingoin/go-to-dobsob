@@ -1,4 +1,5 @@
-import * as dates from './dates'
+/* eslint-disable @typescript-eslint/no-use-before-define */
+import * as dates from "./dates";
 import { JulianDay } from "./constants";
 
 // Note: Javascript Implementation of the Astronomical Algorithms found in the
@@ -6,10 +7,8 @@ import { JulianDay } from "./constants";
 // Implementation will be validated by unit tests extracted from Jean Meus'
 // textbook.
 
-
-const gDeltaTValues =
-  [
-// All the initial values are observed values from 1 February 1973 to 1 June 2017 as taken from http:// maia.usno.navy.mil/ser7/deltat.data
+const gDeltaTValues = [
+  // All the initial values are observed values from 1 February 1973 to 1 June 2017 as taken from http:// maia.usno.navy.mil/ser7/deltat.data
   { JD: 2441714.5, DeltaT: 43.4724 },
   { JD: 2441742.5, DeltaT: 43.5648 },
   { JD: 2441773.5, DeltaT: 43.6737 },
@@ -25,21 +24,21 @@ const gDeltaTValues =
   { JD: 2442079.5, DeltaT: 44.5646 },
   { JD: 2442107.5, DeltaT: 44.6425 },
   { JD: 2442138.5, DeltaT: 44.7386 },
-  { JD: 2442168.5, DeltaT: 44.8370 },
+  { JD: 2442168.5, DeltaT: 44.837 },
   { JD: 2442199.5, DeltaT: 44.9302 },
   { JD: 2442229.5, DeltaT: 44.9986 },
   { JD: 2442260.5, DeltaT: 45.0584 },
   { JD: 2442291.5, DeltaT: 45.1284 },
   { JD: 2442321.5, DeltaT: 45.2064 },
-  { JD: 2442352.5, DeltaT: 45.2980 },
+  { JD: 2442352.5, DeltaT: 45.298 },
   { JD: 2442382.5, DeltaT: 45.3897 },
   { JD: 2442413.5, DeltaT: 45.4761 },
   { JD: 2442444.5, DeltaT: 45.5633 },
-  { JD: 2442472.5, DeltaT: 45.6450 },
+  { JD: 2442472.5, DeltaT: 45.645 },
   { JD: 2442503.5, DeltaT: 45.7375 },
   { JD: 2442533.5, DeltaT: 45.8284 },
   { JD: 2442564.5, DeltaT: 45.9133 },
-  { JD: 2442594.5, DeltaT: 45.9820 },
+  { JD: 2442594.5, DeltaT: 45.982 },
   { JD: 2442625.5, DeltaT: 46.0408 },
   { JD: 2442656.5, DeltaT: 46.1067 },
   { JD: 2442686.5, DeltaT: 46.1825 },
@@ -51,7 +50,7 @@ const gDeltaTValues =
   { JD: 2442869.5, DeltaT: 46.7302 },
   { JD: 2442899.5, DeltaT: 46.8284 },
   { JD: 2442930.5, DeltaT: 46.9247 },
-  { JD: 2442960.5, DeltaT: 46.9970 },
+  { JD: 2442960.5, DeltaT: 46.997 },
   { JD: 2442991.5, DeltaT: 47.0709 },
   { JD: 2443022.5, DeltaT: 47.1451 },
   { JD: 2443052.5, DeltaT: 47.2362 },
@@ -66,7 +65,7 @@ const gDeltaTValues =
   { JD: 2443325.5, DeltaT: 48.0348 },
   { JD: 2443356.5, DeltaT: 48.0942 },
   { JD: 2443387.5, DeltaT: 48.1608 },
-  { JD: 2443417.5, DeltaT: 48.2460 },
+  { JD: 2443417.5, DeltaT: 48.246 },
   { JD: 2443448.5, DeltaT: 48.3439 },
   { JD: 2443478.5, DeltaT: 48.4355 },
   { JD: 2443509.5, DeltaT: 48.5344 },
@@ -78,7 +77,7 @@ const gDeltaTValues =
   { JD: 2443690.5, DeltaT: 49.1013 },
   { JD: 2443721.5, DeltaT: 49.1591 },
   { JD: 2443752.5, DeltaT: 49.2286 },
-  { JD: 2443782.5, DeltaT: 49.3070 },
+  { JD: 2443782.5, DeltaT: 49.307 },
   { JD: 2443813.5, DeltaT: 49.4018 },
   { JD: 2443843.5, DeltaT: 49.4945 },
   { JD: 2443874.5, DeltaT: 49.5862 },
@@ -89,7 +88,7 @@ const gDeltaTValues =
   { JD: 2444025.5, DeltaT: 50.0347 },
   { JD: 2444055.5, DeltaT: 50.1019 },
   { JD: 2444086.5, DeltaT: 50.1622 },
-  { JD: 2444117.5, DeltaT: 50.2260 },
+  { JD: 2444117.5, DeltaT: 50.226 },
   { JD: 2444147.5, DeltaT: 50.2968 },
   { JD: 2444178.5, DeltaT: 50.3831 },
   { JD: 2444208.5, DeltaT: 50.4599 },
@@ -107,7 +106,7 @@ const gDeltaTValues =
   { JD: 2444574.5, DeltaT: 51.3063 },
   { JD: 2444605.5, DeltaT: 51.3808 },
   { JD: 2444636.5, DeltaT: 51.4526 },
-  { JD: 2444664.5, DeltaT: 51.5160 },
+  { JD: 2444664.5, DeltaT: 51.516 },
   { JD: 2444695.5, DeltaT: 51.5985 },
   { JD: 2444725.5, DeltaT: 51.6809 },
   { JD: 2444756.5, DeltaT: 51.7573 },
@@ -120,13 +119,13 @@ const gDeltaTValues =
   { JD: 2444970.5, DeltaT: 52.1668 },
   { JD: 2445001.5, DeltaT: 52.2316 },
   { JD: 2445029.5, DeltaT: 52.2938 },
-  { JD: 2445060.5, DeltaT: 52.3680 },
+  { JD: 2445060.5, DeltaT: 52.368 },
   { JD: 2445090.5, DeltaT: 52.4465 },
-  { JD: 2445121.5, DeltaT: 52.5180 },
+  { JD: 2445121.5, DeltaT: 52.518 },
   { JD: 2445151.5, DeltaT: 52.5752 },
   { JD: 2445182.5, DeltaT: 52.6178 },
   { JD: 2445213.5, DeltaT: 52.6668 },
-  { JD: 2445243.5, DeltaT: 52.7340 },
+  { JD: 2445243.5, DeltaT: 52.734 },
   { JD: 2445274.5, DeltaT: 52.8056 },
   { JD: 2445304.5, DeltaT: 52.8792 },
   { JD: 2445335.5, DeltaT: 52.9565 },
@@ -137,13 +136,13 @@ const gDeltaTValues =
   { JD: 2445486.5, DeltaT: 53.3747 },
   { JD: 2445516.5, DeltaT: 53.4335 },
   { JD: 2445547.5, DeltaT: 53.4778 },
-  { JD: 2445578.5, DeltaT: 53.5300 },
+  { JD: 2445578.5, DeltaT: 53.53 },
   { JD: 2445608.5, DeltaT: 53.5845 },
   { JD: 2445639.5, DeltaT: 53.6523 },
   { JD: 2445669.5, DeltaT: 53.7256 },
   { JD: 2445700.5, DeltaT: 53.7882 },
   { JD: 2445731.5, DeltaT: 53.8367 },
-  { JD: 2445760.5, DeltaT: 53.8830 },
+  { JD: 2445760.5, DeltaT: 53.883 },
   { JD: 2445791.5, DeltaT: 53.9443 },
   { JD: 2445821.5, DeltaT: 54.0042 },
   { JD: 2445852.5, DeltaT: 54.0536 },
@@ -155,7 +154,7 @@ const gDeltaTValues =
   { JD: 2446035.5, DeltaT: 54.2958 },
   { JD: 2446066.5, DeltaT: 54.3427 },
   { JD: 2446097.5, DeltaT: 54.3911 },
-  { JD: 2446125.5, DeltaT: 54.4320 },
+  { JD: 2446125.5, DeltaT: 54.432 },
   { JD: 2446156.5, DeltaT: 54.4898 },
   { JD: 2446186.5, DeltaT: 54.5456 },
   { JD: 2446217.5, DeltaT: 54.5977 },
@@ -191,19 +190,19 @@ const gDeltaTValues =
   { JD: 2447130.5, DeltaT: 55.7698 },
   { JD: 2447161.5, DeltaT: 55.8197 },
   { JD: 2447192.5, DeltaT: 55.8615 },
-  { JD: 2447221.5, DeltaT: 55.9130 },
+  { JD: 2447221.5, DeltaT: 55.913 },
   { JD: 2447252.5, DeltaT: 55.9663 },
-  { JD: 2447282.5, DeltaT: 56.0220 },
-  { JD: 2447313.5, DeltaT: 56.0700 },
+  { JD: 2447282.5, DeltaT: 56.022 },
+  { JD: 2447313.5, DeltaT: 56.07 },
   { JD: 2447343.5, DeltaT: 56.0939 },
   { JD: 2447374.5, DeltaT: 56.1105 },
   { JD: 2447405.5, DeltaT: 56.1314 },
   { JD: 2447435.5, DeltaT: 56.1611 },
   { JD: 2447466.5, DeltaT: 56.2068 },
   { JD: 2447496.5, DeltaT: 56.2583 },
-  { JD: 2447527.5, DeltaT: 56.3000 },
+  { JD: 2447527.5, DeltaT: 56.3 },
   { JD: 2447558.5, DeltaT: 56.3399 },
-  { JD: 2447586.5, DeltaT: 56.3790 },
+  { JD: 2447586.5, DeltaT: 56.379 },
   { JD: 2447617.5, DeltaT: 56.4283 },
   { JD: 2447647.5, DeltaT: 56.4804 },
   { JD: 2447678.5, DeltaT: 56.5352 },
@@ -243,7 +242,7 @@ const gDeltaTValues =
   { JD: 2448713.5, DeltaT: 58.5401 },
   { JD: 2448743.5, DeltaT: 58.6228 },
   { JD: 2448774.5, DeltaT: 58.6917 },
-  { JD: 2448804.5, DeltaT: 58.7410 },
+  { JD: 2448804.5, DeltaT: 58.741 },
   { JD: 2448835.5, DeltaT: 58.7836 },
   { JD: 2448866.5, DeltaT: 58.8406 },
   { JD: 2448896.5, DeltaT: 58.8986 },
@@ -255,7 +254,7 @@ const gDeltaTValues =
   { JD: 2449078.5, DeltaT: 59.3574 },
   { JD: 2449108.5, DeltaT: 59.4434 },
   { JD: 2449139.5, DeltaT: 59.5242 },
-  { JD: 2449169.5, DeltaT: 59.5850 },
+  { JD: 2449169.5, DeltaT: 59.585 },
   { JD: 2449200.5, DeltaT: 59.6344 },
   { JD: 2449231.5, DeltaT: 59.6928 },
   { JD: 2449261.5, DeltaT: 59.7588 },
@@ -266,10 +265,10 @@ const gDeltaTValues =
   { JD: 2449412.5, DeltaT: 60.1231 },
   { JD: 2449443.5, DeltaT: 60.2042 },
   { JD: 2449473.5, DeltaT: 60.2804 },
-  { JD: 2449504.5, DeltaT: 60.3530 },
+  { JD: 2449504.5, DeltaT: 60.353 },
   { JD: 2449534.5, DeltaT: 60.4012 },
-  { JD: 2449565.5, DeltaT: 60.4440 },
-  { JD: 2449596.5, DeltaT: 60.4900 },
+  { JD: 2449565.5, DeltaT: 60.444 },
+  { JD: 2449596.5, DeltaT: 60.49 },
   { JD: 2449626.5, DeltaT: 60.5578 },
   { JD: 2449657.5, DeltaT: 60.6324 },
   { JD: 2449687.5, DeltaT: 60.7059 },
@@ -278,12 +277,12 @@ const gDeltaTValues =
   { JD: 2449777.5, DeltaT: 60.9387 },
   { JD: 2449808.5, DeltaT: 61.0277 },
   { JD: 2449838.5, DeltaT: 61.1103 },
-  { JD: 2449869.5, DeltaT: 61.1870 },
+  { JD: 2449869.5, DeltaT: 61.187 },
   { JD: 2449899.5, DeltaT: 61.2454 },
   { JD: 2449930.5, DeltaT: 61.2881 },
   { JD: 2449961.5, DeltaT: 61.3378 },
   { JD: 2449991.5, DeltaT: 61.4036 },
-  { JD: 2450022.5, DeltaT: 61.4760 },
+  { JD: 2450022.5, DeltaT: 61.476 },
   { JD: 2450052.5, DeltaT: 61.5525 },
   { JD: 2450083.5, DeltaT: 61.6287 },
   { JD: 2450114.5, DeltaT: 61.6846 },
@@ -295,9 +294,9 @@ const gDeltaTValues =
   { JD: 2450296.5, DeltaT: 62.0343 },
   { JD: 2450327.5, DeltaT: 62.0714 },
   { JD: 2450357.5, DeltaT: 62.1202 },
-  { JD: 2450388.5, DeltaT: 62.1810 },
+  { JD: 2450388.5, DeltaT: 62.181 },
   { JD: 2450418.5, DeltaT: 62.2382 },
-  { JD: 2450449.5, DeltaT: 62.2950 },
+  { JD: 2450449.5, DeltaT: 62.295 },
   { JD: 2450480.5, DeltaT: 62.3506 },
   { JD: 2450508.5, DeltaT: 62.3995 },
   { JD: 2450539.5, DeltaT: 62.4754 },
@@ -343,8 +342,8 @@ const gDeltaTValues =
   { JD: 2451757.5, DeltaT: 63.9833 },
   { JD: 2451788.5, DeltaT: 63.9938 },
   { JD: 2451818.5, DeltaT: 64.0093 },
-  { JD: 2451849.5, DeltaT: 64.0400 },
-  { JD: 2451879.5, DeltaT: 64.0670 },
+  { JD: 2451849.5, DeltaT: 64.04 },
+  { JD: 2451879.5, DeltaT: 64.067 },
   { JD: 2451910.5, DeltaT: 64.0908 },
   { JD: 2451941.5, DeltaT: 64.1068 },
   { JD: 2451969.5, DeltaT: 64.1282 },
@@ -355,11 +354,11 @@ const gDeltaTValues =
   { JD: 2452122.5, DeltaT: 64.2073 },
   { JD: 2452153.5, DeltaT: 64.2116 },
   { JD: 2452183.5, DeltaT: 64.2223 },
-  { JD: 2452214.5, DeltaT: 64.2500 },
+  { JD: 2452214.5, DeltaT: 64.25 },
   { JD: 2452244.5, DeltaT: 64.2761 },
   { JD: 2452275.5, DeltaT: 64.2998 },
   { JD: 2452306.5, DeltaT: 64.3192 },
-  { JD: 2452334.5, DeltaT: 64.3450 },
+  { JD: 2452334.5, DeltaT: 64.345 },
   { JD: 2452365.5, DeltaT: 64.3735 },
   { JD: 2452395.5, DeltaT: 64.3943 },
   { JD: 2452426.5, DeltaT: 64.4151 },
@@ -387,10 +386,10 @@ const gDeltaTValues =
   { JD: 2453096.5, DeltaT: 64.6176 },
   { JD: 2453126.5, DeltaT: 64.6374 },
   { JD: 2453157.5, DeltaT: 64.6549 },
-  { JD: 2453187.5, DeltaT: 64.6530 },
+  { JD: 2453187.5, DeltaT: 64.653 },
   { JD: 2453218.5, DeltaT: 64.6379 },
   { JD: 2453249.5, DeltaT: 64.6372 },
-  { JD: 2453279.5, DeltaT: 64.6400 },
+  { JD: 2453279.5, DeltaT: 64.64 },
   { JD: 2453310.5, DeltaT: 64.6543 },
   { JD: 2453340.5, DeltaT: 64.6723 },
   { JD: 2453371.5, DeltaT: 64.6876 },
@@ -407,9 +406,9 @@ const gDeltaTValues =
   { JD: 2453705.5, DeltaT: 64.8311 },
   { JD: 2453736.5, DeltaT: 64.8452 },
   { JD: 2453767.5, DeltaT: 64.8597 },
-  { JD: 2453795.5, DeltaT: 64.8850 },
+  { JD: 2453795.5, DeltaT: 64.885 },
   { JD: 2453826.5, DeltaT: 64.9175 },
-  { JD: 2453856.5, DeltaT: 64.9480 },
+  { JD: 2453856.5, DeltaT: 64.948 },
   { JD: 2453887.5, DeltaT: 64.9794 },
   { JD: 2453917.5, DeltaT: 64.9895 },
   { JD: 2453948.5, DeltaT: 65.0028 },
@@ -432,13 +431,13 @@ const gDeltaTValues =
   { JD: 2454466.5, DeltaT: 65.4573 },
   { JD: 2454497.5, DeltaT: 65.4868 },
   { JD: 2454526.5, DeltaT: 65.5152 },
-  { JD: 2454557.5, DeltaT: 65.5450 },
+  { JD: 2454557.5, DeltaT: 65.545 },
   { JD: 2454587.5, DeltaT: 65.5781 },
   { JD: 2454618.5, DeltaT: 65.6127 },
   { JD: 2454648.5, DeltaT: 65.6288 },
-  { JD: 2454679.5, DeltaT: 65.6370 },
+  { JD: 2454679.5, DeltaT: 65.637 },
   { JD: 2454710.5, DeltaT: 65.6493 },
-  { JD: 2454740.5, DeltaT: 65.6760 },
+  { JD: 2454740.5, DeltaT: 65.676 },
   { JD: 2454771.5, DeltaT: 65.7097 },
   { JD: 2454801.5, DeltaT: 65.7461 },
   { JD: 2454832.5, DeltaT: 65.7768 },
@@ -452,10 +451,10 @@ const gDeltaTValues =
   { JD: 2455075.5, DeltaT: 65.9628 },
   { JD: 2455105.5, DeltaT: 65.9839 },
   { JD: 2455136.5, DeltaT: 66.0147 },
-  { JD: 2455166.5, DeltaT: 66.0420 },
+  { JD: 2455166.5, DeltaT: 66.042 },
   { JD: 2455197.5, DeltaT: 66.0699 },
   { JD: 2455228.5, DeltaT: 66.0961 },
-  { JD: 2455256.5, DeltaT: 66.1310 },
+  { JD: 2455256.5, DeltaT: 66.131 },
   { JD: 2455287.5, DeltaT: 66.1683 },
   { JD: 2455317.5, DeltaT: 66.2072 },
   { JD: 2455348.5, DeltaT: 66.2356 },
@@ -477,34 +476,34 @@ const gDeltaTValues =
   { JD: 2455835.5, DeltaT: 66.5056 },
   { JD: 2455866.5, DeltaT: 66.5383 },
   { JD: 2455896.5, DeltaT: 66.5706 },
-  { JD: 2455927.5, DeltaT: 66.6030 },
-  { JD: 2455958.5, DeltaT: 66.6340 },
+  { JD: 2455927.5, DeltaT: 66.603 },
+  { JD: 2455958.5, DeltaT: 66.634 },
   { JD: 2455987.5, DeltaT: 66.6569 },
   { JD: 2456018.5, DeltaT: 66.6925 }, // 1 April 2012
   { JD: 2456048.5, DeltaT: 66.7289 },
   { JD: 2456079.5, DeltaT: 66.7579 },
   { JD: 2456109.5, DeltaT: 66.7708 },
-  { JD: 2456140.5, DeltaT: 66.7740 },
+  { JD: 2456140.5, DeltaT: 66.774 },
   { JD: 2456171.5, DeltaT: 66.7846 },
   { JD: 2456201.5, DeltaT: 66.8103 },
-  { JD: 2456232.5, DeltaT: 66.8400 },
+  { JD: 2456232.5, DeltaT: 66.84 },
   { JD: 2456262.5, DeltaT: 66.8779 },
   { JD: 2456293.5, DeltaT: 66.9069 }, // 1 January 2013
   { JD: 2456324.5, DeltaT: 66.9443 }, // 1 Februrary 2013
   { JD: 2456352.5, DeltaT: 66.9763 }, // 1 March 2013
   { JD: 2456383.5, DeltaT: 67.0258 }, // 1 April 2013
   { JD: 2456413.5, DeltaT: 67.0716 }, // 1 May 2013
-  { JD: 2456444.5, DeltaT: 67.1100 }, // 1 June 2013
+  { JD: 2456444.5, DeltaT: 67.11 }, // 1 June 2013
   { JD: 2456474.5, DeltaT: 67.1266 }, // 1 July 2013
   { JD: 2456505.5, DeltaT: 67.1331 }, // 1 August 2013
   { JD: 2456536.5, DeltaT: 67.1458 }, // 1 September 2013
   { JD: 2456566.5, DeltaT: 67.1717 }, // 1 October 2013
   { JD: 2456597.5, DeltaT: 67.2091 }, // 1 November 2013
-  { JD: 2456627.5, DeltaT: 67.2460 }, // 1 December 2013
-  { JD: 2456658.5, DeltaT: 67.2810 }, // 1 January 2014
+  { JD: 2456627.5, DeltaT: 67.246 }, // 1 December 2013
+  { JD: 2456658.5, DeltaT: 67.281 }, // 1 January 2014
   { JD: 2456689.5, DeltaT: 67.3136 }, // 1 February 2014
   { JD: 2456717.5, DeltaT: 67.3457 }, // 1 March 2014
-  { JD: 2456748.5, DeltaT: 67.3890 }, // 1 April 2014
+  { JD: 2456748.5, DeltaT: 67.389 }, // 1 April 2014
   { JD: 2456778.5, DeltaT: 67.4318 }, // 1 May 2014
   { JD: 2456809.5, DeltaT: 67.4666 }, // 1 June 2014
   { JD: 2456839.5, DeltaT: 67.4858 }, // 1 July 2014
@@ -512,7 +511,7 @@ const gDeltaTValues =
   { JD: 2456901.5, DeltaT: 67.5111 }, // 1 September 2014
   { JD: 2456931.5, DeltaT: 67.5353 }, // 1 October 2014
   { JD: 2456962.5, DeltaT: 67.5711 }, // 1 November 2014
-  { JD: 2456992.5, DeltaT: 67.6070 }, // 1 December 2014
+  { JD: 2456992.5, DeltaT: 67.607 }, // 1 December 2014
   { JD: 2457023.5, DeltaT: 67.6439 }, // 1 January 2015
   { JD: 2457054.5, DeltaT: 67.6765 }, // 1 February 2015
   { JD: 2457082.5, DeltaT: 67.7117 }, // 1 March 2015
@@ -521,7 +520,7 @@ const gDeltaTValues =
   { JD: 2457174.5, DeltaT: 67.8402 }, // 1 June 2015
   { JD: 2457204.5, DeltaT: 67.8606 }, // 1 July 2015
   { JD: 2457235.5, DeltaT: 67.8822 }, // 1 August 2015
-  { JD: 2457266.5, DeltaT: 67.9120 }, // 1 September 2015
+  { JD: 2457266.5, DeltaT: 67.912 }, // 1 September 2015
   { JD: 2457296.5, DeltaT: 67.9546 }, // 1 October 2015
   { JD: 2457327.5, DeltaT: 68.0055 }, // 1 November 2015
   { JD: 2457357.5, DeltaT: 68.0514 }, // 1 December 2015
@@ -534,7 +533,7 @@ const gDeltaTValues =
   { JD: 2457570.5, DeltaT: 68.3964 }, // 1 July 2016
   { JD: 2457601.5, DeltaT: 68.4094 }, // 1 August 2016
   { JD: 2457632.5, DeltaT: 68.4305 }, // 1 September 2016
-  { JD: 2457662.5, DeltaT: 68.4630 }, // 1 October 2016
+  { JD: 2457662.5, DeltaT: 68.463 }, // 1 October 2016
   { JD: 2457693.5, DeltaT: 68.5078 }, // 1 November 2016
   { JD: 2457723.5, DeltaT: 68.5537 }, // 1 December 2016
   { JD: 2457754.5, DeltaT: 68.5928 }, // 1 January 2017
@@ -544,7 +543,7 @@ const gDeltaTValues =
   { JD: 2457874.5, DeltaT: 68.7623 }, // 1 May 2017
   { JD: 2457905.5, DeltaT: 68.8033 }, // 1 June 2017
 
-// All these final values are predicted values from Year 2017.5 to Year 2026.0 are taken from http:// maia.usno.navy.mil/ser7/deltat.preds
+  // All these final values are predicted values from Year 2017.5 to Year 2026.0 are taken from http:// maia.usno.navy.mil/ser7/deltat.preds
   { JD: 2457937.0, DeltaT: 68.81 }, // 2017.5
   { JD: 2458028.25, DeltaT: 68.86 }, // 2017.75
   { JD: 2458119.5, DeltaT: 68.99 }, // 2018.0
@@ -558,24 +557,90 @@ const gDeltaTValues =
   { JD: 2458941.0, DeltaT: 70 }, // 2020.25
   { JD: 2459763.0, DeltaT: 71 }, // 2022.5
   { JD: 2461041.5, DeltaT: 72 } // 2026.0
-// Note as currently coded there is a single discontinuity of c. 2.074 seconds on 1 January 2026. At this point http:// maia.usno.navy.mil/ser7/deltat.preds indicates an error value for DeltaT of about 5 seconds anyway.
-  ]
+  // Note as currently coded there is a single discontinuity of c. 2.074 seconds on 1 January 2026. At this point http:// maia.usno.navy.mil/ser7/deltat.preds indicates an error value for DeltaT of about 5 seconds anyway.
+];
 
-const gLeapSecondCoefficients = //  Cumulative leap second values from 1 Jan 1961 to 1 January 2017 as taken from http:// maia.usno.navy.mil/ser7/tai-utc.dat
+const gLeapSecondCoefficients =
+  //  Cumulative leap second values from 1 Jan 1961 to 1 January 2017 as taken from http:// maia.usno.navy.mil/ser7/tai-utc.dat
   [
-    { JD: 2437300.5, LeapSeconds: 1.4228180, BaseMJD: 37300, Coefficient: 0.001296 },
-    { JD: 2437512.5, LeapSeconds: 1.3728180, BaseMJD: 37300, Coefficient: 0.001296 },
-    { JD: 2437665.5, LeapSeconds: 1.8458580, BaseMJD: 37665, Coefficient: 0.0011232 },
-    { JD: 2438334.5, LeapSeconds: 1.9458580, BaseMJD: 37665, Coefficient: 0.0011232 },
-    { JD: 2438395.5, LeapSeconds: 3.2401300, BaseMJD: 38761, Coefficient: 0.001296 },
-    { JD: 2438486.5, LeapSeconds: 3.3401300, BaseMJD: 38761, Coefficient: 0.001296 },
-    { JD: 2438639.5, LeapSeconds: 3.4401300, BaseMJD: 38761, Coefficient: 0.001296 },
-    { JD: 2438761.5, LeapSeconds: 3.5401300, BaseMJD: 38761, Coefficient: 0.001296 },
-    { JD: 2438820.5, LeapSeconds: 3.6401300, BaseMJD: 38761, Coefficient: 0.001296 },
-    { JD: 2438942.5, LeapSeconds: 3.7401300, BaseMJD: 38761, Coefficient: 0.001296 },
-    { JD: 2439004.5, LeapSeconds: 3.8401300, BaseMJD: 38761, Coefficient: 0.001296 },
-    { JD: 2439126.5, LeapSeconds: 4.3131700, BaseMJD: 39126, Coefficient: 0.002592 },
-    { JD: 2439887.5, LeapSeconds: 4.2131700, BaseMJD: 39126, Coefficient: 0.002592 },
+    {
+      JD: 2437300.5,
+      LeapSeconds: 1.422818,
+      BaseMJD: 37300,
+      Coefficient: 0.001296
+    },
+    {
+      JD: 2437512.5,
+      LeapSeconds: 1.372818,
+      BaseMJD: 37300,
+      Coefficient: 0.001296
+    },
+    {
+      JD: 2437665.5,
+      LeapSeconds: 1.845858,
+      BaseMJD: 37665,
+      Coefficient: 0.0011232
+    },
+    {
+      JD: 2438334.5,
+      LeapSeconds: 1.945858,
+      BaseMJD: 37665,
+      Coefficient: 0.0011232
+    },
+    {
+      JD: 2438395.5,
+      LeapSeconds: 3.24013,
+      BaseMJD: 38761,
+      Coefficient: 0.001296
+    },
+    {
+      JD: 2438486.5,
+      LeapSeconds: 3.34013,
+      BaseMJD: 38761,
+      Coefficient: 0.001296
+    },
+    {
+      JD: 2438639.5,
+      LeapSeconds: 3.44013,
+      BaseMJD: 38761,
+      Coefficient: 0.001296
+    },
+    {
+      JD: 2438761.5,
+      LeapSeconds: 3.54013,
+      BaseMJD: 38761,
+      Coefficient: 0.001296
+    },
+    {
+      JD: 2438820.5,
+      LeapSeconds: 3.64013,
+      BaseMJD: 38761,
+      Coefficient: 0.001296
+    },
+    {
+      JD: 2438942.5,
+      LeapSeconds: 3.74013,
+      BaseMJD: 38761,
+      Coefficient: 0.001296
+    },
+    {
+      JD: 2439004.5,
+      LeapSeconds: 3.84013,
+      BaseMJD: 38761,
+      Coefficient: 0.001296
+    },
+    {
+      JD: 2439126.5,
+      LeapSeconds: 4.31317,
+      BaseMJD: 39126,
+      Coefficient: 0.002592
+    },
+    {
+      JD: 2439887.5,
+      LeapSeconds: 4.21317,
+      BaseMJD: 39126,
+      Coefficient: 0.002592
+    },
     { JD: 2441317.5, LeapSeconds: 10.0, BaseMJD: 41317, Coefficient: 0.0 },
     { JD: 2441499.5, LeapSeconds: 11.0, BaseMJD: 41317, Coefficient: 0.0 },
     { JD: 2441683.5, LeapSeconds: 12.0, BaseMJD: 41317, Coefficient: 0.0 },
@@ -604,204 +669,258 @@ const gLeapSecondCoefficients = //  Cumulative leap second values from 1 Jan 196
     { JD: 2456109.5, LeapSeconds: 35.0, BaseMJD: 41317, Coefficient: 0.0 },
     { JD: 2457204.5, LeapSeconds: 36.0, BaseMJD: 41317, Coefficient: 0.0 },
     { JD: 2457754.5, LeapSeconds: 37.0, BaseMJD: 41317, Coefficient: 0.0 }
-  ]
+  ];
 
 // // // // // // // // // // // // // // // // //  Implementation // // // // // // // // // // // // // // /
 
-export function getDeltaT (jd: JulianDay): number {
+export function getDeltaT(jd: JulianDay): number {
   // What will be the return value from the method
-  let Delta = 0
+  let Delta = 0;
 
   // Determine if we can use the lookup table
-  const nLookupElements = gDeltaTValues.length
-  if ((jd >= gDeltaTValues[0].JD) && (jd < gDeltaTValues[nLookupElements - 1].JD)) {
+  const nLookupElements = gDeltaTValues.length;
+  if (jd >= gDeltaTValues[0].JD && jd < gDeltaTValues[nLookupElements - 1].JD) {
     // Find the index in the lookup table which contains the JD value closest to the JD input parameter
-    let bFound = false
-    let nFoundIndex = 0
+    let bFound = false;
+    let nFoundIndex = 0;
     while (!bFound) {
       // assert(nFoundIndex < nLookupElements)
-      bFound = (gDeltaTValues[nFoundIndex].JD > jd)
+      bFound = gDeltaTValues[nFoundIndex].JD > jd;
 
       // Prepare for the next loop
       if (!bFound) {
-        ++nFoundIndex
+        ++nFoundIndex;
       } else {
         // Now do a simple linear interpolation of the DeltaT values from the lookup table
-        Delta = (jd - gDeltaTValues[nFoundIndex - 1].JD) / (gDeltaTValues[nFoundIndex].JD - gDeltaTValues[nFoundIndex - 1].JD) * (gDeltaTValues[nFoundIndex].DeltaT - gDeltaTValues[nFoundIndex - 1].DeltaT) + gDeltaTValues[nFoundIndex - 1].DeltaT
+        Delta =
+          ((jd - gDeltaTValues[nFoundIndex - 1].JD) /
+            (gDeltaTValues[nFoundIndex].JD -
+              gDeltaTValues[nFoundIndex - 1].JD)) *
+            (gDeltaTValues[nFoundIndex].DeltaT -
+              gDeltaTValues[nFoundIndex - 1].DeltaT) +
+          gDeltaTValues[nFoundIndex - 1].DeltaT;
       }
     }
   } else {
-    const y = dates.fractionalYear(jd)
+    const y = dates.fractionalYear(jd);
 
     // Use the polynomial expressions from Espenak & Meeus 2006. References: http:// eclipse.gsfc.nasa.gov/SEcat5/deltatpoly.html and
     // http:// www.staff.science.uu.nl/~gent0113/deltat/deltat_old.htm (Espenak & Meeus 2006 section)
     if (y < -500) {
-      const u = (y - 1820) / 100.0
-      const u2 = u * u
-      Delta = -20 + (32 * u2)
+      const u = (y - 1820) / 100.0;
+      const u2 = u * u;
+      Delta = -20 + 32 * u2;
     } else if (y < 500) {
-      const u = y / 100.0
-      const u2 = u * u
-      const u3 = u2 * u
-      const u4 = u3 * u
-      const u5 = u4 * u
-      const u6 = u5 * u
-      Delta = 10583.6 + (-1014.41 * u) + (33.78311 * u2) + (-5.952053 * u3) + (-0.1798452 * u4) + (0.022174192 * u5) + (0.0090316521 * u6)
+      const u = y / 100.0;
+      const u2 = u * u;
+      const u3 = u2 * u;
+      const u4 = u3 * u;
+      const u5 = u4 * u;
+      const u6 = u5 * u;
+      Delta =
+        10583.6 +
+        -1014.41 * u +
+        33.78311 * u2 +
+        -5.952053 * u3 +
+        -0.1798452 * u4 +
+        0.022174192 * u5 +
+        0.0090316521 * u6;
     } else if (y < 1600) {
-      const u = (y - 1000) / 100.0
-      const u2 = u * u
-      const u3 = u2 * u
-      const u4 = u3 * u
-      const u5 = u4 * u
-      const u6 = u5 * u
-      Delta = 1574.2 + (-556.01 * u) + (71.23472 * u2) + (0.319781 * u3) + (-0.8503463 * u4) + (-0.005050998 * u5) + (0.0083572073 * u6)
+      const u = (y - 1000) / 100.0;
+      const u2 = u * u;
+      const u3 = u2 * u;
+      const u4 = u3 * u;
+      const u5 = u4 * u;
+      const u6 = u5 * u;
+      Delta =
+        1574.2 +
+        -556.01 * u +
+        71.23472 * u2 +
+        0.319781 * u3 +
+        -0.8503463 * u4 +
+        -0.005050998 * u5 +
+        0.0083572073 * u6;
     } else if (y < 1700) {
-      const u = (y - 1600) / 100.0
-      const u2 = u * u
-      const u3 = u2 * u
-      Delta = 120 + (-98.08 * u) + (-153.2 * u2) + (u3 / 0.007129)
+      const u = (y - 1600) / 100.0;
+      const u2 = u * u;
+      const u3 = u2 * u;
+      Delta = 120 + -98.08 * u + -153.2 * u2 + u3 / 0.007129;
     } else if (y < 1800) {
-      const u = (y - 1700) / 100.0
-      const u2 = u * u
-      const u3 = u2 * u
-      const u4 = u3 * u
-      Delta = 8.83 + (16.03 * u) + (-59.285 * u2) + (133.36 * u3) + (-u4 / 0.01174)
+      const u = (y - 1700) / 100.0;
+      const u2 = u * u;
+      const u3 = u2 * u;
+      const u4 = u3 * u;
+      Delta = 8.83 + 16.03 * u + -59.285 * u2 + 133.36 * u3 + -u4 / 0.01174;
     } else if (y < 1860) {
-      const u = (y - 1800) / 100.0
-      const u2 = u * u
-      const u3 = u2 * u
-      const u4 = u3 * u
-      const u5 = u4 * u
-      const u6 = u5 * u
-      const u7 = u6 * u
-      Delta = 13.72 + (-33.2447 * u) + (68.612 * u2) + (4111.6 * u3) + (-37436 * u4) + (121272 * u5) + (-169900 * u6) + (87500 * u7)
+      const u = (y - 1800) / 100.0;
+      const u2 = u * u;
+      const u3 = u2 * u;
+      const u4 = u3 * u;
+      const u5 = u4 * u;
+      const u6 = u5 * u;
+      const u7 = u6 * u;
+      Delta =
+        13.72 +
+        -33.2447 * u +
+        68.612 * u2 +
+        4111.6 * u3 +
+        -37436 * u4 +
+        121272 * u5 +
+        -169900 * u6 +
+        87500 * u7;
     } else if (y < 1900) {
-      const u = (y - 1860) / 100.0
-      const u2 = u * u
-      const u3 = u2 * u
-      const u4 = u3 * u
-      const u5 = u4 * u
-      Delta = 7.62 + (57.37 * u) + (-2517.54 * u2) + (16806.68 * u3) + (-44736.24 * u4) + (u5 / 0.0000233174)
+      const u = (y - 1860) / 100.0;
+      const u2 = u * u;
+      const u3 = u2 * u;
+      const u4 = u3 * u;
+      const u5 = u4 * u;
+      Delta =
+        7.62 +
+        57.37 * u +
+        -2517.54 * u2 +
+        16806.68 * u3 +
+        -44736.24 * u4 +
+        u5 / 0.0000233174;
     } else if (y < 1920) {
-      const u = (y - 1900) / 100.0
-      const u2 = u * u
-      const u3 = u2 * u
-      const u4 = u3 * u
-      Delta = -2.79 + (149.4119 * u) + (-598.939 * u2) + (6196.6 * u3) + (-19700 * u4)
+      const u = (y - 1900) / 100.0;
+      const u2 = u * u;
+      const u3 = u2 * u;
+      const u4 = u3 * u;
+      Delta = -2.79 + 149.4119 * u + -598.939 * u2 + 6196.6 * u3 + -19700 * u4;
     } else if (y < 1941) {
-      const u = (y - 1920) / 100.0
-      const u2 = u * u
-      const u3 = u2 * u
-      Delta = 21.20 + (84.493 * u) + (-761.00 * u2) + (2093.6 * u3)
+      const u = (y - 1920) / 100.0;
+      const u2 = u * u;
+      const u3 = u2 * u;
+      Delta = 21.2 + 84.493 * u + -761.0 * u2 + 2093.6 * u3;
     } else if (y < 1961) {
-      const u = (y - 1950) / 100.0
-      const u2 = u * u
-      const u3 = u2 * u
-      Delta = 29.07 + (40.7 * u) + (-u2 / 0.0233) + (u3 / 0.002547)
+      const u = (y - 1950) / 100.0;
+      const u2 = u * u;
+      const u3 = u2 * u;
+      Delta = 29.07 + 40.7 * u + -u2 / 0.0233 + u3 / 0.002547;
     } else if (y < 1986) {
-      const u = (y - 1975) / 100.0
-      const u2 = u * u
-      const u3 = u2 * u
-      Delta = 45.45 + 106.7 * u - u2 / 0.026 - u3 / 0.000718
+      const u = (y - 1975) / 100.0;
+      const u2 = u * u;
+      const u3 = u2 * u;
+      Delta = 45.45 + 106.7 * u - u2 / 0.026 - u3 / 0.000718;
     } else if (y < 2005) {
-      const u = (y - 2000) / 100.0
-      const u2 = u * u
-      const u3 = u2 * u
-      const u4 = u3 * u
-      const u5 = u4 * u
-      Delta = 63.86 + (33.45 * u) + (-603.74 * u2) + (1727.5 * u3) + (65181.4 * u4) + (237359.9 * u5)
+      const u = (y - 2000) / 100.0;
+      const u2 = u * u;
+      const u3 = u2 * u;
+      const u4 = u3 * u;
+      const u5 = u4 * u;
+      Delta =
+        63.86 +
+        33.45 * u +
+        -603.74 * u2 +
+        1727.5 * u3 +
+        65181.4 * u4 +
+        237359.9 * u5;
     } else if (y < 2050) {
-      const u = (y - 2000) / 100.0
-      const u2 = u * u
-      Delta = 62.92 + (32.217 * u) + (55.89 * u2)
+      const u = (y - 2000) / 100.0;
+      const u2 = u * u;
+      Delta = 62.92 + 32.217 * u + 55.89 * u2;
     } else if (y < 2150) {
-      const u = (y - 1820) / 100.0
-      const u2 = u * u
-      Delta = -205.72 + (56.28 * u) + (32 * u2)
+      const u = (y - 1820) / 100.0;
+      const u2 = u * u;
+      Delta = -205.72 + 56.28 * u + 32 * u2;
     } else {
-      const u = (y - 1820) / 100.0
-      const u2 = u * u
-      Delta = -20 + (32 * u2)
+      const u = (y - 1820) / 100.0;
+      const u2 = u * u;
+      Delta = -20 + 32 * u2;
     }
   }
 
-  return Delta
+  return Delta;
 }
 
-export function getCumulativeLeapSeconds (jd: JulianDay): number {
+export function getCumulativeLeapSeconds(jd: JulianDay): number {
   // What will be the return value from the method
-  let LeapSeconds = 0
+  let LeapSeconds = 0;
 
-  const nLookupElements = gLeapSecondCoefficients.length
+  const nLookupElements = gLeapSecondCoefficients.length;
   if (jd >= gLeapSecondCoefficients[0].JD) {
     // Find the index in the lookup table which contains the JD value closest to the JD input parameter
-    let bContinue = true
-    let nIndex = 1
+    let bContinue = true;
+    let nIndex = 1;
     while (bContinue) {
       if (nIndex >= nLookupElements) {
-        LeapSeconds = gLeapSecondCoefficients[nLookupElements - 1].LeapSeconds + (jd - 2400000.5 - gLeapSecondCoefficients[nLookupElements - 1].BaseMJD) * gLeapSecondCoefficients[nLookupElements - 1].Coefficient
-        bContinue = false
+        LeapSeconds =
+          gLeapSecondCoefficients[nLookupElements - 1].LeapSeconds +
+          (jd -
+            2400000.5 -
+            gLeapSecondCoefficients[nLookupElements - 1].BaseMJD) *
+            gLeapSecondCoefficients[nLookupElements - 1].Coefficient;
+        bContinue = false;
       } else if (jd < gLeapSecondCoefficients[nIndex].JD) {
-        LeapSeconds = gLeapSecondCoefficients[nIndex - 1].LeapSeconds + (jd - 2400000.5 - gLeapSecondCoefficients[nIndex - 1].BaseMJD) * gLeapSecondCoefficients[nIndex - 1].Coefficient
-        bContinue = false
+        LeapSeconds =
+          gLeapSecondCoefficients[nIndex - 1].LeapSeconds +
+          (jd - 2400000.5 - gLeapSecondCoefficients[nIndex - 1].BaseMJD) *
+            gLeapSecondCoefficients[nIndex - 1].Coefficient;
+        bContinue = false;
       }
 
       // Prepare for the next loop
       if (bContinue) {
-        ++nIndex
+        ++nIndex;
       }
     }
   }
 
-  return LeapSeconds
+  return LeapSeconds;
 }
 
-export function transformTT2UTC (jd: JulianDay): number {
+export function transformTT2UTC(jd: JulianDay): number {
   // Outside of the range 1 January 1961 to 500 days after the last leap second,
   // we implement TT2UTC as TT2UT1
-  const nLookupElements = gLeapSecondCoefficients.length
-  if ((jd < gLeapSecondCoefficients[0].JD) || (jd > (gLeapSecondCoefficients[nLookupElements - 1].JD + 500))) {
-    return transformTT2UT1(jd)
+  const nLookupElements = gLeapSecondCoefficients.length;
+  if (
+    jd < gLeapSecondCoefficients[0].JD ||
+    jd > gLeapSecondCoefficients[nLookupElements - 1].JD + 500
+  ) {
+    return transformTT2UT1(jd);
   }
 
-  const DT = getDeltaT(jd)
-  const UT1 = jd - (DT / 86400.0)
-  const LeapSeconds = getCumulativeLeapSeconds(jd)
-  return ((DT - LeapSeconds - 32.184) / 86400.0) + UT1
+  const DT = getDeltaT(jd);
+  const UT1 = jd - DT / 86400.0;
+  const LeapSeconds = getCumulativeLeapSeconds(jd);
+  return (DT - LeapSeconds - 32.184) / 86400.0 + UT1;
 }
 
-export function transformUTC2TT (jd: JulianDay): number {
+export function transformUTC2TT(jd: JulianDay): number {
   // Outside of the range 1 January 1961 to 500 days after the last leap second,
   // we implement TT2UTC as TT2UT1
-  const nLookupElements = gLeapSecondCoefficients.length
-  if ((jd < gLeapSecondCoefficients[0].JD) || (jd > (gLeapSecondCoefficients[nLookupElements - 1].JD + 500))) {
-    return transformUT12TT(jd)
+  const nLookupElements = gLeapSecondCoefficients.length;
+  if (
+    jd < gLeapSecondCoefficients[0].JD ||
+    jd > gLeapSecondCoefficients[nLookupElements - 1].JD + 500
+  ) {
+    return transformUT12TT(jd);
   }
 
-  const DT = getDeltaT(jd)
-  const LeapSeconds = getCumulativeLeapSeconds(jd)
-  const UT1 = jd - ((DT - LeapSeconds - 32.184) / 86400.0)
-  return UT1 + (DT / 86400.0)
+  const DT = getDeltaT(jd);
+  const LeapSeconds = getCumulativeLeapSeconds(jd);
+  const UT1 = jd - (DT - LeapSeconds - 32.184) / 86400.0;
+  return UT1 + DT / 86400.0;
 }
 
-export function transformTT2TAI (jd: JulianDay): number {
-  return jd - (32.184 / 86400.0)
+export function transformTT2TAI(jd: JulianDay): number {
+  return jd - 32.184 / 86400.0;
 }
 
-export function transformTAI2TT (jd: JulianDay): number {
-  return jd + (32.184 / 86400.0)
+export function transformTAI2TT(jd: JulianDay): number {
+  return jd + 32.184 / 86400.0;
 }
 
-export function transformTT2UT1 (jd: JulianDay): number {
-  return jd - (getDeltaT(jd) / 86400.0)
+export function transformTT2UT1(jd: JulianDay): number {
+  return jd - getDeltaT(jd) / 86400.0;
 }
 
-export function transformUT12TT (jd: JulianDay): number {
-  return jd + (getDeltaT(jd) / 86400.0)
+export function transformUT12TT(jd: JulianDay): number {
+  return jd + getDeltaT(jd) / 86400.0;
 }
 
-export function transformUT1MinusUTC (jd: JulianDay): number {
-  const JDUTC = jd + ((getDeltaT(jd) - getCumulativeLeapSeconds(jd) - 32.184) / 86400)
-  return (jd - JDUTC) * 86400
+export function transformUT1MinusUTC(jd: JulianDay): number {
+  const JDUTC =
+    jd + (getDeltaT(jd) - getCumulativeLeapSeconds(jd) - 32.184) / 86400;
+  return (jd - JDUTC) * 86400;
 }
-

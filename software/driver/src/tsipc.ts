@@ -4,12 +4,12 @@ import { createIpcChannel, createTypesafeIpc } from "electron-typesafe-ipc";
 const ipcSchema = {
   main: {
     //main -> rend communication
-    serialPorts: createIpcChannel<string[]>({ msg: "IPC_SERIAL_PORTS" }),
+    serialPorts: createIpcChannel<string[]>({ msg: "IPC_SERIAL_PORTS" })
   },
   rend: {
     //rend -> main communication
-    setPort: createIpcChannel<string>({ msg: "IPC_SET_SERIAL_PORT" }),
-  },
+    setPort: createIpcChannel<string>({ msg: "IPC_SET_SERIAL_PORT" })
+  }
 };
 
 //then create the typesafe ipc object via library function

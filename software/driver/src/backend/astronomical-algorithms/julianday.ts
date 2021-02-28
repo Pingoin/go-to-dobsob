@@ -6,7 +6,7 @@ import {
   Hour,
   J1970,
   JulianDay,
-  MJD_START,
+  MJD_START
 } from "./constants";
 import { fmod, isNumber } from "./utils";
 
