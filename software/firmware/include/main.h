@@ -13,5 +13,5 @@
 altAzController altAZ;
 double azimuth=0.0, altitude=0.0;
 BluetoothSerial SerialBT;
-
+void interpretComData(String input);
 #endif
