@@ -39,8 +39,24 @@ void setup()
     while (1)
       ;
   }
+
+  adafruit_bno055_offsets_t calibrationData;
+  calibrationData.accel_offset_x = 26;
+  calibrationData.accel_offset_y = -20;
+  calibrationData.accel_offset_z = -2;
+  calibrationData.gyro_offset_x = 0;
+  calibrationData.gyro_offset_y = -2;
+  calibrationData.gyro_offset_z = -1;
+  calibrationData.mag_offset_z = -2;
+  calibrationData.mag_offset_x = 0;
+  calibrationData.mag_offset_y = -2;
+  calibrationData.accel_radius = 1000;
+  calibrationData.mag_radius = 712;
+  bno.setSensorOffsets(calibrationData);
+
+  bno.setMode(Adafruit_BNO055::OPERATION_MODE_NDOF);
   delay(100);
-  SerialBT.begin("ESP32test");
+  SerialBT.begin("Pingoscope");
   sensors_event_t orientationData;
   bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);
   printEvent(&orientationData);
